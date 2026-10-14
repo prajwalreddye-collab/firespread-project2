@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forest Fire Prediction Dashboard</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+
+        header {
+            background: #173b32;
+            color: white;
+            padding: 26px 7%;
+        }
+
+        header h1 {
+            margin: 0 0 8px;
+            font-size: 27px;
+        }
+
+        header p {
+            margin: 0;
+            color: #d1fae5;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 18px;
+        }
+
+        .card, .panel {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px #0f172a10;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .value {
+            font-size: 21px;
+            font-weight: bold;
+            color: #166534;
+        }
+
+        .panel {
+            margin-top: 24px;
+        }
+
+        .panel h2 {
+            margin-top: 0;
+        }
+
+        .notice {
+            background: #fff7ed;
+            border-left: 4px solid #ea580c;
+            padding: 15px;
+            border-radius: 5px;
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: #64748b;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Forest Fire Spread Prediction</h1>
+        <p>Deep Learning-Based Spatio-Temporal Prediction Using ConvLSTM</p>
+    </header>
+
+    <main>
+        <section class="cards">
+            <div class="card">
+                <h3>Deep Learning Model</h3>
+                <div class="value">ConvLSTM</div>
+            </div>
+
+            <div class="card">
+                <h3>Input Data</h3>
+                <div class="value">Satellite Sequences</div>
+            </div>
+
+            <div class="card">
+                <h3>Model Status</h3>
+                <div class="value">Trained</div>
+            </div>
+
+            <div class="card">
+                <h3>Prediction Status</h3>
+                <div class="value">Testing Required</div>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2>Fire Prediction Results</h2>
+            <div class="cards">
+            <div class="card">
+                <h3>Minimum Probability</h3>
+            <div class="value">{{ stats.minimum }}</div>
+            </div>
+
+            <div class="card">
+                <h3>Maximum Probability</h3>
+             <div class="value">{{ stats.maximum }}</div>
+        </div>
+
+            <div class="card">
+                <h3>Average Probability</h3>
+            <div class="value">{{ stats.average }}</div>
+        </div>
+    </div>
+
+        <p><strong>Status:</strong> {{ stats.status }}</p>
+        <p>These values are model probabilities, not confirmed fire measurements.</p>
+            <div style="text-align: center; margin: 20px 0;">
+            <img
+                src="{{ url_for('static', filename='prediction_map.png') }}"
+                alt="ConvLSTM fire probability map"
+                style="width: 100%; max-width: 650px; border-radius: 10px;"
+            >
+                <p>ConvLSTM predicted fire probability map</p>
+            </div>
+            <p>
+                The prediction map and fire-spread statistics will appear
+                here after the existing model is connected and verified.
+            </p>
+
+            <div class="notice">
+                <strong>Current limitation:</strong>
+                The model has been trained, but reliable fire detection
+                has not yet been demonstrated. Predictions will not be
+                presented as reliable until they are validated.
+            </div>
+        </section>
+    </main>
+
+    <section class="panel">
+    <h2>Dataset Information</h2>
+
+    <div class="cards">
+        <div class="card">
+            <h3>Data Source</h3>
+            <div class="value">TS-SatFire</div>
+            <p>Satellite imagery dataset</p>
+        </div>
+
+        <div class="card">
+            <h3>Input Sequences</h3>
+            <div class="value">8 patches</div>
+            <p>Each patch contains 3 time steps</p>
+        </div>
+
+        <div class="card">
+            <h3>Input Dimensions</h3>
+            <div class="value">112 × 112</div>
+            <p>6 input channels per time step</p>
+        </div>
+
+        <div class="card">
+            <h3>Prediction Model</h3>
+            <div class="value">ConvLSTM</div>
+            <p>Spatio-temporal deep learning</p>
+        </div>
+    </div>
+
+    <div class="notice" style="margin-top: 18px;">
+        <strong>Dataset limitation:</strong>
+        The current experiment uses a small satellite-data subset,
+        not a validated collection of drone thermal-image sequences.
+        The prediction results are experimental and are not suitable
+        for operational fire warnings.
+    </div>
+</section>
+
+    <footer>
+        Forest Fire Prediction Project | ConvLSTM
+    </footer>
+</body>
+</html>

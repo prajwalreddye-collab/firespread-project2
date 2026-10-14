@@ -1,0 +1,10 @@
+@'
+.venv/
+__pycache__/
+*.pyc
+.env
+dataset/
+processed_data/
+.ipynb_checkpoints/
+*.keras
+'@ | Set-Content -Path .gitignore
